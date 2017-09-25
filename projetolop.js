@@ -1,6 +1,5 @@
 <script>
-// Mova seu mouse na janela ao lado 
-// para ver o processing em ação
+
 var x = 160;
 var y = 160;
 
