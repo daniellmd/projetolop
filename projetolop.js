@@ -2,15 +2,22 @@
 
 var x = 160;
 var y = 160;
-
+var rx  = 100;
+var ry = 100;
+var vidas = 3;
+var potos = 0;
 function setup() {
   createCanvas(400, 400);
 }
 
 function draw() {
-  clear ();
-  fill(64, 224, 0);
-  rect(100, 100, 80, 80);
+  background(0);
+  fill(0,255,255);
+  
+  rect(rx, ry, 80, 80);
+  
+  rx++
+  ry--
 
   
  if (keyIsDown(LEFT_ARROW))
@@ -27,8 +34,11 @@ function draw() {
 
   fill(255, 0, 0);
   ellipse(x, y, 50, 50);
-}
-
-
-
+  
+  textSize(25);
+  fill(255,255,0)
+  text("Vidas:" +vidas,30,40);
+  fill(255,255,0);
+  text("Pontos:" +potos,230,40);
+  
 </script>
