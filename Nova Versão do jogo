@@ -1,0 +1,174 @@
+var x = 400;
+var y = 200;
+var rx  = 390;
+var ry = 250;
+var vidas = 3;
+var pontos = 0;
+var nivel =1;
+var tamBloco = 30;
+var colisao;
+var imgzombie1;
+var imgzombie2;
+var fundo;
+var imgpirulito;
+var tempo=0;
+
+function preload(){
+  imgzombie1 = loadImage("zombie1.png");
+  imgzombie2 = loadImage("zombie2.png");
+  fundo = loadImage("BG.png");
+  imgpirulito = loadImage("pirulito.png");
+  }
+  
+var  
+  cenario = [ 
+  ['*','*','*','*','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n','n'],
+  ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'], 
+  ['#','*','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
+  ['#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#'],
+  ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','#'],
+  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','#'],
+  ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','#'],
+  ['#','#','#','#','v','#','v','#','v','#','#','v','v','#','#','v','#','v','#','v','#','#','#','#'],
+  ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','#'],
+  ['#','v','#','#','#','#','v','#','#','#','v','v','k','v','#','#','#','v','#','#','#','#','v','#'],
+  ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','#'],
+  ['#','#','#','#','v','#','v','#','v','#','#','#','#','#','#','v','#','v','#','v','#','#','#','#'],
+  ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','#'],
+  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','#'],
+  ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','#'],
+  ['#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#'],
+  ['#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
+  ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#']
+];
+
+function colisao(px, py) {
+  j = Math.floor( px / tamBloco ); 
+  i = Math.floor( py / tamBloco );
+  if ( cenario[i][j] == '#' ) {
+     return true;     
+  }
+  else {
+     return false;  
+
+  }
+  
+}
+function colisao_bonus(px, py) {
+  j = Math.floor( px / tamBloco ); 
+  i = Math.floor( py / tamBloco );
+  if ( cenario[i][j] == 'v' ) {
+     cenario[i][j] = '*'
+  
+   return true;     
+  }
+  else {
+     return false;  
+  }
+  
+}
+
+function setup() {
+  createCanvas(721, 541);
+  frameRate(30)
+
+
+}
+
+
+function draw() {
+//if(tempo>900 && pontos<100)
+//{
+ // alert("acabou")
+//}
+tempo+=3
+  image(fundo,-530,-160);
+  fill(0,255,255);
+  
+  image(imgzombie2,rx,ry,30,30);
+  if(ry<=455){ry++}
+  if(rx<=810){rx++}  
+  
+
+  //imageMode(CENTER)
+//*Colisão blocos*
+    if (keyIsDown(LEFT_ARROW)) {
+     if ( ! colisao( x + 10 - tamBloco/2, y ) ) {
+       x = x - 5;       
+     }
+   }
+   if ( keyIsDown(RIGHT_ARROW)) {
+     if ( ! colisao( x + 30, y ) ) {
+       x = x + 5;       
+     } 
+   }
+
+  if (keyIsDown(UP_ARROW)){
+     if ( ! colisao( x, y +10 - tamBloco/2 ) ) {
+       y = y - 5;       
+     }
+   }
+
+  if (keyIsDown(DOWN_ARROW)){
+     if ( ! colisao( x, y + 30 ) ) {
+       y = y + 5;       
+     } 
+   }
+    
+    //*Colisão pontos*
+      
+  
+ if (keyIsDown(LEFT_ARROW)) {
+     if (  colisao_bonus( x + 20 - tamBloco/2, y ) ) {
+       x = x - 10;
+  pontos++;       
+     }
+   }
+   if ( keyIsDown(RIGHT_ARROW)) {
+     if (  colisao_bonus( x + 20, y ) ) {
+       x = x + 10; 
+    pontos++;             
+     } 
+   }
+
+  if (keyIsDown(UP_ARROW)){
+     if (  colisao_bonus( x, y + 20 - tamBloco/2 ) ) {
+       y = y - 10; 
+    pontos++;             
+     }
+   }
+
+  if (keyIsDown(DOWN_ARROW)){
+     if (  colisao_bonus( x, y + 20 ) ) {
+       y = y + 10;  
+  pontos++;            
+     } 
+   }
+   
+
+
+  fill(255, 0, 0);
+  image(imgzombie1,x,y,30,30);
+  
+  textSize(25);
+  fill(255,0,0)
+  text("Vidas:" +vidas,20,25);
+  text("Pontos:" +pontos,120,25);
+  text("Nivel: "+nivel,300,25);
+  text("Tempo: "+parseInt((tempo/30)),450,25);
+  
+   for ( i = 0; i < cenario.length; i++ ) { 
+    for ( j = 0; j < cenario[0].length; j++ ) {  
+      if ( cenario[i][j] == '#' ) {
+         fill(160,82,45);
+        rect(j*tamBloco,i*tamBloco,tamBloco,tamBloco);   
+    }
+      if(cenario[i][j] =='v')
+      { 
+        fill(255);
+        ellipse(j*tamBloco+tamBloco/2,i*tamBloco+tamBloco/2,16,16);
+      }
+   
+} 
+}
+}
