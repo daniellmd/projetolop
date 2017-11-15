@@ -3,33 +3,35 @@ var y = 205;
 var rx  = 390;
 var ry = 300;
 var vidas = 3;
-var pontos = 450;
+var pontos = 0;
 var nivel =1;
 var tamBloco = 35;
-var colisao;
 var imgzombie1;
 var imgzombie2;
 var fundo;
 var imgpirulito;
 var tempo=0;
+var tela=1;
 
 function preload(){
   imgzombie1 = loadImage("zombie1.png");
   imgzombie2 = loadImage("zombie2.png");
   fundo = loadImage("BG.png");
   imgpirulito = loadImage("pirulito.png");
+  end = loadImage("imgfinal.jpg");
+  vida = loadImage("heart.png")
   }
   
 var  
   cenario = [ 
   ['*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*'],
   ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'], 
-  ['#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
+  ['#','v','*','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
   ['#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','v','v','v','#'],
-  ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','v','v','v','#'],
+  ['#','v','*','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','v','v','v','#'],
   ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','v','v','v','#'],
   ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','v','#'],
-  ['#','#','#','#','v','#','v','#','v','#','#','v','v','#','#','v','#','v','#','v','#','#','#','#','#','#','#'],
+  ['#','#','#','#','v','#','v','#','v','#','*','v','v','#','#','v','#','v','#','v','#','#','#','#','#','#','#'],
   ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
   ['#','v','#','#','#','#','v','#','#','#','v','v','@','v','#','#','#','v','#','#','#','#','v','v','v','v','#'],
   ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
@@ -56,6 +58,19 @@ function colisao(px, py) {
 function colisao_bonus(px, py) {
   j = Math.floor( px / tamBloco ); 
   i = Math.floor( py / tamBloco );
+  if ( cenario[i][j] == '@' ) {
+     cenario[i][j] = '*'
+  
+   return true;     
+  }
+  else {
+     return false;  
+  }
+  
+}
+function colisao_pontos(px, py) {
+  j = Math.floor( px / tamBloco ); 
+  i = Math.floor( py / tamBloco );
   if ( cenario[i][j] == 'v' ) {
      cenario[i][j] = '*'
   
@@ -76,10 +91,19 @@ function setup() {
 
 
 function draw() {
-//if(tempo>900 && pontos<100)
-//{
- // alert("acabou")
-//}
+if(tela==1) {
+  image(fundo,-530,-160);
+  fill(0,255,255);
+    textSize(50);
+    fill(0);
+    text("Press enter to start",250,250);
+    if(keyIsDown(ENTER)){
+      tela=2;
+    }
+
+}
+
+if(tela==2){
 tempo+=3
   image(fundo,-530,-160);
   fill(0,255,255);
@@ -126,29 +150,57 @@ tempo+=3
       
   
  if (keyIsDown(LEFT_ARROW)) {
-     if (  colisao_bonus( x + 20 - tamBloco/2, y ) ) {
+     if (  colisao_pontos( x + 20 - tamBloco/2, y ) ) {
        x = x - 10;
   pontos++;       
      }
    }
    if ( keyIsDown(RIGHT_ARROW)) {
-     if (  colisao_bonus( x + 20, y ) ) {
+     if (  colisao_pontos( x + 20, y ) ) {
        x = x + 10; 
     pontos++;             
      } 
    }
 
   if (keyIsDown(UP_ARROW)){
-     if (  colisao_bonus( x, y + 20 - tamBloco/2 ) ) {
+     if (  colisao_pontos( x, y + 20 - tamBloco/2 ) ) {
        y = y - 10; 
     pontos++;             
      }
    }
 
   if (keyIsDown(DOWN_ARROW)){
-     if (  colisao_bonus( x, y + 20 ) ) {
+     if (  colisao_pontos( x, y + 20 ) ) {
        y = y + 10;  
   pontos++;            
+     } 
+   }
+
+  /Colisão com bonus/
+  if (keyIsDown(LEFT_ARROW)) {
+     if (  colisao_bonus( x + 20 - tamBloco/2, y ) ) {
+       x = x - 10;
+  vidas++;       
+     }
+   }
+   if ( keyIsDown(RIGHT_ARROW)) {
+     if (  colisao_bonus( x + 20, y ) ) {
+       x = x + 10; 
+    vidas++;             
+     } 
+   }
+
+  if (keyIsDown(UP_ARROW)){
+     if (  colisao_bonus( x, y + 20 - tamBloco/2 ) ) {
+       y = y - 10; 
+    vidas++;             
+     }
+   }
+
+  if (keyIsDown(DOWN_ARROW)){
+     if (  colisao_bonus( x, y + 20 ) ) {
+       y = y + 10;  
+  vidas++;            
      } 
    }
    
@@ -163,7 +215,12 @@ tempo+=3
   text("Pontos:" +pontos,120,25);
   text("Nivel: "+nivel,300,25);
   text("Tempo: "+parseInt((tempo/30)),450,25);
-  
+  for(i=0;i<vidas;i++)
+  {
+    if(cenario[i] =='*'){
+      image(vida,20,25)
+    }
+  }
    for ( i = 0; i < cenario.length; i++ ) { 
     for ( j = 0; j < cenario[0].length; j++ ) {  
       if ( cenario[i][j] == '#' ) {
@@ -183,7 +240,58 @@ tempo+=3
       }
 } 
 }
-
+if(vidas==0)
+{
+  tela=4
+}
+}
+if(tela==3)
+{
+  image(end,0,0)
+  textSize(90)
+  fill(255,0,0)
+  text("Parabens, fim de jogo!",0,150)
+  if(keyIsDown(RIGHT_ARROW))
+  {
+    tela=1
+  }
+}
+if(tela==4)
+{
+  image(fundo,-530,-160)
+  textSize(100)
+  fill(255,0,0)
+  text("GAME OVER",175,300)
+  if(keyIsDown(LEFT_ARROW))
+  {
+    tela=1
+  }
+}
+if(pontos==200)
+{
+  cenario = [ 
+  ['*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*'],
+  ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'], 
+  ['#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
+  ['#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','#','#','v','#','#','#','#','v','v','v','v','#'],
+  ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','v','v','v','#'],
+  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','v','v','v','#'],
+  ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','v','#'],
+  ['#','#','#','#','v','#','v','#','v','#','#','v','v','#','#','v','#','v','#','v','#','#','#','#','#','#','#'],
+  ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
+  ['#','v','#','#','#','#','v','#','#','#','v','v','@','v','#','#','#','v','#','#','#','#','v','v','v','v','#'],
+  ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
+  ['#','#','#','#','v','#','v','#','v','#','#','#','#','#','#','v','#','v','#','v','#','#','#','v','v','v','#'],
+  ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','v','#'],
+  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','v','@','v','#'],
+  ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','v','v','v','#'],
+  ['#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
+  ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#']
+];
+x=400;
+y=205;
+nivel=3
+}
 if(pontos==230)
 {
    cenario = [ 
@@ -207,7 +315,7 @@ if(pontos==230)
 ];
 x=50;
 y=70;
-nivel=2
+nivel=4
 }
 
 if(pontos==450)
