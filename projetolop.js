@@ -1,9 +1,9 @@
 var x = 400;
 var y = 205;
-var rx  = 390;
-var ry = 300;
+var rx  = 450;
+var ry = 210;
 var vidas = 3;
-var pontos = 600;
+var pontos = 99;
 var nivel =1;
 var tamBloco = 35;
 var imgzombie1;
@@ -12,6 +12,11 @@ var fundo;
 var imgpirulito;
 var tempo=0;
 var tela=1;
+var cima= 0;
+var baixo = 1;
+var esquerda = 2;
+var direita = 3;
+var direcao = cima;
 
 function preload(){
   imgzombie1 = loadImage("zombie1.png");
@@ -33,11 +38,11 @@ var
   ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','v','#'],
   ['#','#','#','#','v','#','v','#','v','#','#','v','v','#','#','v','#','v','#','v','#','#','v','#','#','v','#'],
   ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
-  ['#','v','#','#','#','#','v','#','#','#','v','v','@','v','#','#','#','v','#','#','#','#','v','#','#','v','#'],
+  ['#','v','#','#','#','#','v','#','#','#','v','v','v','v','#','#','#','v','#','#','#','#','v','#','#','v','#'],
   ['#','v','v','v','v','#','v','v','v','#','v','v','v','v','#','v','v','v','#','v','v','v','v','v','v','v','#'],
   ['#','#','#','#','v','#','v','#','v','#','#','#','#','#','#','v','#','v','#','v','#','#','#','v','v','v','#'],
   ['#','v','v','v','v','v','v','#','v','v','v','v','v','v','v','v','#','v','v','v','v','v','v','v','#','#','#'],
-  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','v','@','v','#'],
+  ['#','v','#','v','#','#','#','#','#','#','v','#','#','v','#','#','#','#','#','#','v','#','v','v','v','v','#'],
   ['#','v','#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#','v','v','v','v','#'],
   ['#','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','v','#'],
   ['#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#']
@@ -80,10 +85,25 @@ function colisao_pontos(px, py) {
   }
   
 }
+/*
+function colisao_fantasma(px, py) {
+  j = Math.floor( px / tamBloco ); 
+  i = Math.floor( py / tamBloco );
+  if ( tela=  ) {
+    
+   return true;     
+  }
+  else {
+     return false;  
+  }
+  
+}
+*/
 
 function setup() {
   createCanvas(946, 596);
-  frameRate(30)
+  frameRate(30);
+  direcao = esquerda;
 
 
 }
@@ -107,21 +127,52 @@ tempo+=3
   image(fundo,-530,-160);
   fill(0,255,255);
   
-  //*Colisão do fantasma com os blocos
+  /*Colisão do fantasma com os blocos*/
   image(imgzombie2,rx,ry,36,33);
-  if ( ! colisao( rx + 17 - tamBloco/2, ry ) ) {
+  if(direcao == esquerda){
+  if ( ! colisao( rx -10, ry + tamBloco/2 ) ) {
        rx = rx - 10;       
      }
-
-  if ( ! colisao( rx, ry +17 - tamBloco/2 ) ) {
+     else
+     {
+		  direcao =Math.floor((Math.random() * 3));
+	}
+}
+  if(direcao == cima){
+  if ( ! colisao( rx + tamBloco/2, ry -10) ) {
        ry = ry - 10;       
      }
+  else
+  {
+	   direcao =Math.floor((Math.random() * 3));
+  }
+}
+  if(direcao == direita)
+  {
+	  if(! colisao( rx +20, ry + tamBloco/2)){
+		  rx = rx+10;
+	  }
+	  else{
+		   direcao =Math.floor((Math.random() * 3));
+	  }
+   }
+   if(direcao == baixo)
+   {
+	   if( ! colisao( rx + tamBloco/2, ry +40 ) ){
+		   ry = ry + 10;
+	   }
+	   else
+	   {
+			   direcao =Math.floor((Math.random() * 3));
+		  }
+	  }
 
    
   
 
   //imageMode(CENTER)
-//*Colisão blocos*
+  
+/*Colisão do personagem com os blocos*/
     if (keyIsDown(LEFT_ARROW)) {
      if ( ! colisao( x + 17 - tamBloco/2, y ) ) {
        x = x - 10;       
@@ -145,7 +196,7 @@ tempo+=3
      } 
    }
     
-    //*Colisão pontos*
+    /*Colisão do personagem com os pontos*/
       
   
  if (keyIsDown(LEFT_ARROW)) {
@@ -175,7 +226,7 @@ tempo+=3
      } 
    }
 
-  /Colisão com bonus/
+  /* Colisão com a vida*/
   if (keyIsDown(LEFT_ARROW)) {
      if (  colisao_bonus( x + 20 - tamBloco/2, y ) ) {
        x = x - 10;
@@ -214,6 +265,7 @@ tempo+=3
   text("Pontos:" +pontos,120,25);
   text("Nivel: "+nivel,300,25);
   text("Tempo: "+parseInt((tempo/30)),450,25);
+ 
   for(i=0;i<vidas;i++)
   {
     if(cenario[i] =='*'){
@@ -239,7 +291,8 @@ tempo+=3
       }
 } 
 }
-if(vidas==0)
+if(vidas
+<=0)
 {
   tela=4
 }
@@ -265,6 +318,14 @@ if(tela==4)
   {
     tela=1
   }
+}
+
+if(pontos==100){
+	cenario[2][3]='@'}
+
+if(rx==x)
+{
+	vidas--
 }
   if(pontos==200)
 {
@@ -367,5 +428,6 @@ rx=50;
 nivel=5;
 
 }
+
 }
 
