@@ -24,7 +24,11 @@ var cima= 0;
 var baixo = 1;
 var esquerda = 2;
 var direita = 3;
-var direcao = cima;
+var direcao1 = cima;
+var direcao2 = cima;
+var direcao3 = cima;
+var direcao4 = cima;
+var direcao5 = cima;
 var song;
 var imgzombie3;
 var imgzombie4;
@@ -148,197 +152,197 @@ tempo+=3
   
   /*Colisão do fantasma com os blocos*/
   image(imgzombie2,rx,ry,36,33);
-  if(direcao == esquerda){
+  if(direcao1 == esquerda){
   if ( ! colisao( rx -10, ry + tamBloco/2 ) ) {
        rx = rx - 10;       
      }
      else
      {
-      direcao =Math.floor((Math.random() * 4));
+      direcao1 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == cima){
+  if(direcao1 == cima){
   if ( ! colisao( rx + tamBloco/2, ry -10) ) {
        ry = ry - 10;       
      }
   else
   {
-     direcao =Math.floor((Math.random() * 4));
+     direcao1 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == direita)
+  if(direcao1 == direita)
   {
     if(! colisao( rx +20, ry + tamBloco/2)){
       rx = rx+10;
     }
     else{
-       direcao =Math.floor((Math.random() * 4));
+       direcao1 =Math.floor((Math.random() * 4));
     }
    }
-   if(direcao == baixo)
+   if(direcao1 == baixo)
    {
      if( ! colisao( rx + tamBloco/2, ry +40 ) ){
        ry = ry + 10;
      }
      else
      {
-         direcao =Math.floor((Math.random() * 4));
+         direcao1 =Math.floor((Math.random() * 4));
       }
     }
 
  image(imgzombie3,cx,cy,36,33);
-  if(direcao == esquerda){
+  if(direcao2 == esquerda){
   if ( ! colisao( cx -10, cy + tamBloco/2 ) ) {
        cx = cx - 10;       
      }
      else
      {
-      direcao =Math.floor((Math.random() * 4));
+      direcao2 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == cima){
+  if(direcao2 == cima){
   if ( ! colisao( cx + tamBloco/2, cy -10) ) {
        cy = cy - 10;       
      }
   else
   {
-     direcao =Math.floor((Math.random() * 4));
+     direcao2 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == direita)
+  if(direcao2 == direita)
   {
     if(! colisao( cx +20, cy + tamBloco/2)){
       cx = cx+10;
     }
     else{
-       direcao =Math.floor((Math.random() * 4));
+       direcao2 =Math.floor((Math.random() * 4));
     }
    }
-   if(direcao == baixo)
+   if(direcao2 == baixo)
    {
      if( ! colisao( cx + tamBloco/2, cy +40 ) ){
        cy = cy + 10;
      }
      else
      {
-         direcao =Math.floor((Math.random() * 4));
+         direcao2 =Math.floor((Math.random() * 4));
       }
     }
 
     image(imgzombie4,xx,xy,36,33);
-  if(direcao == esquerda){
+  if(direcao3 == esquerda){
   if ( ! colisao( xx -10,xy + tamBloco/2 ) ) {
        xx = xx - 10;       
      }
      else
      {
-      direcao =Math.floor((Math.random() * 4));
+      direcao3 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == cima){
+  if(direcao3 == cima){
   if ( ! colisao( xx + tamBloco/2, xy -10) ) {
        xy = xy - 10;       
      }
   else
   {
-     direcao =Math.floor((Math.random() * 4));
+     direcao3 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == direita)
+  if(direcao3 == direita)
   {
     if(! colisao( xx +20, xy + tamBloco/2)){
       xx = xx+10;
     }
     else{
-       direcao =Math.floor((Math.random() * 4));
+       direcao3 =Math.floor((Math.random() * 4));
     }
    }
-   if(direcao == baixo)
+   if(direcao3 == baixo)
    {
      if( ! colisao( xx + tamBloco/2, xy +40 ) ){
        xy = xy + 10;
      }
      else
      {
-         direcao =Math.floor((Math.random() * 4));
+         direcao3 =Math.floor((Math.random() * 4));
       }
     }
 
     image(imgzombie5,vx,vy,36,33);
-  if(direcao == esquerda){
+  if(direcao4 == esquerda){
   if ( ! colisao( vx -10,vy + tamBloco/2 ) ) {
        vx = vx - 10;       
      }
      else
      {
-      direcao =Math.floor((Math.random() * 4));
+      direcao4 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == cima){
+  if(direcao4 == cima){
   if ( ! colisao( vx + tamBloco/2, vy -10) ) {
        vy = vy - 10;       
      }
   else
   {
-     direcao =Math.floor((Math.random() * 4));
+     direcao4 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == direita)
+  if(direcao4 == direita)
   {
     if(! colisao( vx +20, vy + tamBloco/2)){
       vx = vx+10;
     }
     else{
-       direcao =Math.floor((Math.random() * 4));
+       direcao4 =Math.floor((Math.random() * 4));
     }
    }
-   if(direcao == baixo)
+   if(direcao4 == baixo)
    {
      if( ! colisao( vx + tamBloco/2, vy +40 ) ){
        vy = vy + 10;
      }
      else
      {
-         direcao =Math.floor((Math.random() * 4));
+         direcao4 =Math.floor((Math.random() * 4));
       }
     }
   
 image(imgzombie6,zx,zy,36,33);
-  if(direcao == esquerda){
+  if(direcao5 == esquerda){
   if ( ! colisao( zx -10,zy + tamBloco/2 ) ) {
        zx = zx - 10;       
      }
      else
      {
-      direcao =Math.floor((Math.random() * 4));
+      direcao5 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == cima){
+  if(direcao5 == cima){
   if ( ! colisao( zx + tamBloco/2, zy -10) ) {
        zy = zy - 10;       
      }
   else
   {
-     direcao =Math.floor((Math.random() * 4));
+     direcao5 =Math.floor((Math.random() * 4));
   }
 }
-  if(direcao == direita)
+  if(direcao5 == direita)
   {
     if(! colisao( zx +20, zy + tamBloco/2)){
       zx = zx+10;
     }
     else{
-       direcao =Math.floor((Math.random() * 4));
+       direcao5 =Math.floor((Math.random() * 4));
     }
    }
-   if(direcao == baixo)
+   if(direcao5 == baixo)
    {
      if( ! colisao( zx + tamBloco/2, zy +40 ) ){
        zy = zy + 10;
      }
      else
      {
-         direcao =Math.floor((Math.random() * 4));
+         direcao5 =Math.floor((Math.random() * 4));
       }
     }
   
