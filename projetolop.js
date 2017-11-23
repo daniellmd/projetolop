@@ -35,6 +35,7 @@ var imgzombie4;
 var imgzombie5;
 var imgzombie6;
 
+
 function preload(){
   imgzombie1 = loadImage("zombie1.png");
   imgzombie2 = loadImage("zombie2.png");
