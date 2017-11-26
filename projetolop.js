@@ -7,15 +7,13 @@ var cy = 210;
 var xx = 600;
 var xy = 400;
 var vx = 100;
-var vy = 500;
+var vy = 505;
 var zx = 800;
 var zy = 450;
 var vidas = 3;
 var pontos = 0;
 var nivel =1;
 var tamBloco = 35;
-var imgzombie1;
-var imgzombie2;
 var fundo;
 var imgpirulito;
 var tempo=0;
@@ -30,24 +28,59 @@ var direcao3 = direita;
 var direcao4 = baixo;
 var direcao5 = cima;
 var song;
+var imgzombie1;
+var imgzombie2;
+var imgzombie2esquerda;
+var imgzombie2direita;
+var imgzombie2cima;
+var imgzombie2baixo;
 var imgzombie3;
+var imgzombie3esquerda;
+var imgzombie3direita;
+var imgzombie3cima;
+var imgzombie3baixo;
 var imgzombie4;
 var imgzombie5;
+var imgzombie5esquerda;
+var imgzombie5direita;
+var imgzombie5cima;
+var imgzombie5baixo;
 var imgzombie6;
+var imgzombie6esquerda;
+var imgzombie6direita;
+var imgzombie6cima;
+var imgzombie6baixo;
 
 
 function preload(){
-  imgzombie1 = loadImage("zombie1.png");
-  imgzombie2 = loadImage("zombie2.png");
+ 
   fundo = loadImage("BG.png");
   imgpirulito = loadImage("pirulito.png");
   end = loadImage("imgfinal.jpg");
   vida = loadImage("heart.png");
   song = loadSound("music.mp3");
+  imgzombie1 = loadImage("zombie1.png");
+  imgzombie2 = loadImage("zombie2.png");
+  imgzombie2baixo = loadImage("zombie2.png");
+  imgzombie2cima = loadImage("zombie2cima.png");
+  imgzombie2esquerda = loadImage("zombie2esquerda.png");
+  imgzombie2direita = loadImage("zombie2direita.png");
   imgzombie3 = loadImage("zombie3.png");
+  imgzombie3baixo = loadImage("zombie3.png");
+  imgzombie3cima = loadImage("zombie3cima.png");
+  imgzombie3esquerda = loadImage("zombie3esquerda.png");
+  imgzombie3direita = loadImage("zombie3direita.png");
   imgzombie4 = loadImage("zombie4.png");
   imgzombie5 = loadImage("zombie5.png");
+  imgzombie5baixo = loadImage("zombie5.png");
+  imgzombie5cima = loadImage("zombie5cima.png");
+  imgzombie5esquerda = loadImage("zombie5esquerda.png");
+  imgzombie5direita = loadImage("zombie5direita.png");
   imgzombie6 = loadImage("zombie6.png");
+  imgzombie6baixo = loadImage("zombie6.png");
+  imgzombie6cima = loadImage("zombie6cima.png");
+  imgzombie6esquerda = loadImage("zombie6esquerda.png");
+  imgzombie6direita = loadImage("zombie6direita.png");
   }
   
 var  
@@ -203,8 +236,10 @@ tempo+=3
   fill(0,255,255);
   
   /*Colisão do fantasma com os blocos*/
+  
   image(imgzombie2,rx,ry,36,33);
   if(direcao1 == esquerda){
+    imgzombie2 = imgzombie2esquerda;
   if ( ! colisao( rx -10, ry ) ) {
        rx = rx - 10;       
      }
@@ -214,6 +249,7 @@ tempo+=3
   }
 }
   if(direcao1 == cima){
+    imgzombie2 = imgzombie2cima;
   if ( ! colisao( rx , ry -10) ) {
        ry = ry - 10;       
      }
@@ -223,6 +259,7 @@ tempo+=3
   }
 }
   if(direcao1 == direita)
+    imgzombie2 = imgzombie2direita;
   {
     if(! colisao( rx +35, ry )){
       rx = rx+10;
@@ -232,6 +269,7 @@ tempo+=3
     }
    }
    if(direcao1 == baixo)
+    imgzombie2 = imgzombie2baixo;
    {
      if( ! colisao( rx , ry +40 ) ){
        ry = ry + 10;
@@ -244,6 +282,7 @@ tempo+=3
 
  image(imgzombie3,cx,cy,36,33);
   if(direcao2 == esquerda){
+    imgzombie3 = imgzombie3esquerda;
   if ( ! colisao( cx -10, cy) ) {
        cx = cx - 10;       
      }
@@ -253,6 +292,7 @@ tempo+=3
   }
 }
   if(direcao2 == cima){
+  imgzombie3 = imgzombie3cima;
   if ( ! colisao( cx, cy -10) ) {
        cy = cy - 10;       
      }
@@ -262,6 +302,7 @@ tempo+=3
   }
 }
   if(direcao2 == direita)
+    imgzombie3 = imgzombie3direita;
   {
     if(! colisao( cx +35, cy)){
       cx = cx+10;
@@ -271,6 +312,7 @@ tempo+=3
     }
    }
    if(direcao2 == baixo)
+    imgzombie3 = imgzombie3baixo;
    {
      if( ! colisao( cx , cy +40 ) ){
        cy = cy + 10;
@@ -322,6 +364,7 @@ tempo+=3
 
     image(imgzombie5,vx,vy,36,33);
   if(direcao4 == esquerda){
+    imgzombie5 = imgzombie5esquerda;
   if ( ! colisao( vx -10,vy) ) {
        vx = vx - 10;       
      }
@@ -331,6 +374,7 @@ tempo+=3
   }
 }
   if(direcao4 == cima){
+    imgezombie5 = imgzombie5cima;
   if ( ! colisao( vx , vy -10) ) {
        vy = vy - 10;       
      }
@@ -341,6 +385,7 @@ tempo+=3
 }
   if(direcao4 == direita)
   {
+    imgzombie5 = imgzombie5direita;
     if(! colisao( vx +35, vy )){
       vx = vx+10;
     }
@@ -349,6 +394,7 @@ tempo+=3
     }
    }
    if(direcao4 == baixo)
+    imgzombie5 = imgzombie5baixo;
    {
      if( ! colisao( vx , vy +40 ) ){
        vy = vy + 10;
@@ -361,6 +407,7 @@ tempo+=3
   
 image(imgzombie6,zx,zy,36,33);
   if(direcao5 == esquerda){
+    imgzombie6 = imgzombie6esquerda;
   if ( ! colisao( zx -10,zy) ) {
        zx = zx - 10;       
      }
@@ -370,6 +417,7 @@ image(imgzombie6,zx,zy,36,33);
   }
 }
   if(direcao5 == cima){
+    imgzombie6 = imgzombie6cima;
   if ( ! colisao( zx, zy -10) ) {
        zy = zy - 10;       
      }
@@ -380,6 +428,7 @@ image(imgzombie6,zx,zy,36,33);
 }
   if(direcao5 == direita)
   {
+    imgzombie6 = imgzombie6direita;
     if(! colisao( zx +35, zy)){
       zx = zx+10;
     }
@@ -389,6 +438,7 @@ image(imgzombie6,zx,zy,36,33);
    }
    if(direcao5 == baixo)
    {
+      imgzombie6 = imgzombie6baixo;
      if( ! colisao( zx, zy +35 ) ){
        zy = zy + 10;
      }
