@@ -581,7 +581,8 @@ if(tela==3)
   image(end,0,0)
   textSize(90)
   fill(255,0,0)
-  text("Parabens, fim de jogo!",0,150)
+  text("Parabens, fim de jogo!",0,150);
+ 
   if(keyIsDown(RIGHT_ARROW))
   {
     tela=1
@@ -741,5 +742,7 @@ rx=50;
 nivel=5;
 
 }
+ if(pontos==1000)
+  { tela = 3 }
 
 }
