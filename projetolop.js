@@ -239,7 +239,7 @@ tempo+=3
   
   image(imgzombie2,rx,ry,36,33);
   if(direcao1 == esquerda){
-    imgzombie2 = imgzombie2esquerda;
+
   if ( ! colisao( rx -10, ry ) ) {
        rx = rx - 10;       
      }
@@ -249,7 +249,7 @@ tempo+=3
   }
 }
   if(direcao1 == cima){
-    imgzombie2 = imgzombie2cima;
+
   if ( ! colisao( rx , ry -10) ) {
        ry = ry - 10;       
      }
@@ -259,7 +259,7 @@ tempo+=3
   }
 }
   if(direcao1 == direita)
-    imgzombie2 = imgzombie2direita;
+
   {
     if(! colisao( rx +35, ry )){
       rx = rx+10;
@@ -269,7 +269,7 @@ tempo+=3
     }
    }
    if(direcao1 == baixo)
-    imgzombie2 = imgzombie2baixo;
+
    {
      if( ! colisao( rx , ry +40 ) ){
        ry = ry + 10;
@@ -282,7 +282,7 @@ tempo+=3
 
  image(imgzombie3,cx,cy,36,33);
   if(direcao2 == esquerda){
-    imgzombie3 = imgzombie3esquerda;
+    
   if ( ! colisao( cx -10, cy) ) {
        cx = cx - 10;       
      }
@@ -292,7 +292,7 @@ tempo+=3
   }
 }
   if(direcao2 == cima){
-  imgzombie3 = imgzombie3cima;
+  
   if ( ! colisao( cx, cy -10) ) {
        cy = cy - 10;       
      }
@@ -302,7 +302,7 @@ tempo+=3
   }
 }
   if(direcao2 == direita)
-    imgzombie3 = imgzombie3direita;
+    
   {
     if(! colisao( cx +35, cy)){
       cx = cx+10;
@@ -312,7 +312,7 @@ tempo+=3
     }
    }
    if(direcao2 == baixo)
-    imgzombie3 = imgzombie3baixo;
+    
    {
      if( ! colisao( cx , cy +40 ) ){
        cy = cy + 10;
@@ -364,7 +364,7 @@ tempo+=3
 
     image(imgzombie5,vx,vy,36,33);
   if(direcao4 == esquerda){
-    imgzombie5 = imgzombie5esquerda;
+    
   if ( ! colisao( vx -10,vy) ) {
        vx = vx - 10;       
      }
@@ -374,7 +374,7 @@ tempo+=3
   }
 }
   if(direcao4 == cima){
-    imgezombie5 = imgzombie5cima;
+    
   if ( ! colisao( vx , vy -10) ) {
        vy = vy - 10;       
      }
@@ -385,7 +385,7 @@ tempo+=3
 }
   if(direcao4 == direita)
   {
-    imgzombie5 = imgzombie5direita;
+    
     if(! colisao( vx +35, vy )){
       vx = vx+10;
     }
@@ -394,7 +394,7 @@ tempo+=3
     }
    }
    if(direcao4 == baixo)
-    imgzombie5 = imgzombie5baixo;
+    
    {
      if( ! colisao( vx , vy +40 ) ){
        vy = vy + 10;
